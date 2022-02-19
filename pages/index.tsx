@@ -1,17 +1,40 @@
-import type {NextPage} from "next";
-import Image from "next/image";
+import {useContext} from "react";
+import type {NextPage, GetStaticProps} from "next";
 
-import logo from "../public/logo.svg";
+import Header from "../components/header";
+import ProductsList from "../components/products";
+import Footer from "../components/footer";
+import Cart from "../components/cart";
+import {Product} from "../product/types";
+import {CartContext} from "../context/CartContext";
+interface Props {
+  products: Product[];
+}
 
-const Home: NextPage = () => {
+const Home: NextPage<Props> = ({products}) => {
+  const {isHidden} = useContext(CartContext);
+
   return (
-    <div className="h-full flex bg-black">
-      <header className="m-auto text-white text-center">
-        <Image alt="Basement" src={logo} />
-        <h4>Lets get this party started</h4>
-      </header>
+    <div
+      className="w-full h-full relative flex flex-col m-auto bg-black "
+      style={isHidden ? {} : {overflowY: "hidden"}}
+    >
+      <Cart />
+      <Header />
+      <ProductsList products={products} />
+      <Footer />
     </div>
   );
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const products: Product[] = await import("../product/mock.json").then((res) => res.default);
+
+  return {
+    props: {
+      products,
+    },
+  };
+};
