@@ -1,5 +1,3 @@
-import Cart from "../cart";
-
 import ProductCard from "./productCard";
 
 export default function ProductsList({products}) {

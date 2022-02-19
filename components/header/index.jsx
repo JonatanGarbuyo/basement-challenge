@@ -78,7 +78,7 @@ export default function Header() {
           </div>
         </div>
         <marquee behavior="scroll" className="text-4xl ">
-          A man can't have enough basement. swag — A man can't have enough basement. swag
+          {"A man can't have enough basement. swag — A man can't have enough basement. swag"}
         </marquee>
       </section>
     </header>
