@@ -19,7 +19,7 @@ const Home: NextPage<Props> = ({products}) => {
       className="w-full h-full relative flex flex-col m-auto bg-black "
       style={isHidden ? {} : {overflowY: "hidden"}}
     >
-      <Cart />
+      {isHidden ? null : <Cart />}
       <Header />
       <ProductsList products={products} />
       <Footer />
