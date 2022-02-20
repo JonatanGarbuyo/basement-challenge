@@ -13,7 +13,7 @@ export default function ItemCard({product}) {
   }, [product.qty, product.price]);
 
   return (
-    <div className="flex items-center border-white border-1 m-2 md:mx-6 p-2">
+    <div className="flex  border-white border-1 m-2 md:mx-6 p-2">
       <div
         className="relative w-60 h-36 md:h-52"
         style={{
@@ -23,13 +23,12 @@ export default function ItemCard({product}) {
         <Image
           alt={product.name}
           layout="fill"
-          objectFit="contain"
           objectPosition="bottom center"
           src={product.image}
         />
       </div>
       <div className="flex-grow flex flex-col ml-2 md:ml-4 w-full">
-        <header>
+        <header className="md:flex-grow">
           <div className="flex justify-between items-center content-center">
             <h1 className="text-sm md:text-3xl font-bold uppercase">{product.name}</h1>
             <button className="mr-4" onClick={() => removeItem(product)}>
@@ -45,7 +44,7 @@ export default function ItemCard({product}) {
             {product.description}
           </p>
         </header>
-        <main className="md:flex-grow flex flex-col justify-end text-base md:text-xl">
+        <main className="flex flex-col justify-end text-base md:text-xl">
           <div className="flex gap-3 items-center my-2 ">
             <h2>QUANTITY:</h2>
             <div className="flex flex-row ml-2 border-1 border-white rounded-full">
