@@ -18,49 +18,56 @@ export default function useCart() {
   //
   function updateItemList(newList) {
     window.localStorage.setItem("cart", JSON.stringify(newList));
-    setItemList([...newList]);
+    setItemList(newList);
   }
 
-  //
   function addItem(item) {
     const newItem = {...item, inCartId: Date.now().toString(), qty: 1, selectedSize: "S"};
 
     updateItemList([...itemList, newItem]);
   }
 
-  //
   function removeItem(item) {
-    const itemIndex = itemList.findIndex((cartItem) => item.id === cartItem.id);
+    const newItemList = itemList.filter((cartItem) => item.inCartId !== cartItem.inCartId);
 
-    if (itemIndex >= 0) {
-      itemList.splice(itemIndex, 1);
-    }
-    updateItemList(itemList);
+    updateItemList(newItemList);
   }
 
   function incrementQty(item) {
-    const itemIndex = itemList.findIndex((cartItem) => item.inCartId === cartItem.inCartId);
+    const newItemList = itemList.map((cartItem) => {
+      if (item.inCartId === cartItem.inCartId) cartItem.qty++;
 
-    itemList[itemIndex].qty++;
-    updateItemList(itemList);
+      return cartItem;
+    });
+
+    updateItemList(newItemList);
   }
 
   function decrementQty(item) {
-    const itemIndex = itemList.findIndex((cartItem) => item.inCartId === cartItem.inCartId);
+    const newItemList = itemList.reduce((list, cartItem) => {
+      if (item.inCartId === cartItem.inCartId) {
+        if (cartItem.qty > 1) {
+          cartItem.qty--;
+          list.push(cartItem);
+        }
+      } else {
+        list.push(cartItem);
+      }
 
-    if (itemList[itemIndex].qty > 1) {
-      itemList[itemIndex].qty--;
-    } else {
-      itemList.splice(itemIndex, 1);
-    }
-    updateItemList(itemList);
+      return list;
+    }, []);
+
+    updateItemList(newItemList);
   }
 
   function selectSize(inCartId, value) {
-    const itemIndex = itemList.findIndex((cartItem) => inCartId === cartItem.inCartId);
+    const newItemList = itemList.map((cartItem) => {
+      if (inCartId === cartItem.inCartId) cartItem.selectedSize = value;
 
-    itemList[itemIndex].selectedSize = value;
-    updateItemList(itemList);
+      return cartItem;
+    });
+
+    updateItemList(newItemList);
   }
 
   return {
