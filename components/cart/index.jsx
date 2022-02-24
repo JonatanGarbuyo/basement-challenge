@@ -1,20 +1,13 @@
-import {useCallback, useContext, useEffect, useState} from "react";
+import {useCallback, useContext, useEffect} from "react";
 
 import {CartContext} from "../../context/CartContext";
+import useCart from "../../hooks/useCart";
 
 import ItemCard from "./itemCard";
 
 export default function Cart() {
-  const [cartTotal, setCartTotal] = useState(0);
   const {itemList, isHidden, setIsHidden} = useContext(CartContext);
-
-  useEffect(() => {
-    const total = itemList.reduce((acc, product) => {
-      return (acc += product.price * product.qty);
-    }, 0);
-
-    setCartTotal(total.toFixed(2));
-  }, [itemList]);
+  const {cartTotal, checkout} = useCart();
 
   const escFunction = useCallback(
     (event) => {
@@ -52,14 +45,7 @@ export default function Cart() {
         </div>
         <div className="flex flex-col md:flex-row text-9xl md:text-8xl ">
           <h1 className="md:pl-6 font-bold ">YOUR</h1>
-          <h1
-            className="md:px-6 text-black font-bold "
-            style={{
-              textShadow: "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff",
-            }}
-          >
-            CART
-          </h1>
+          <h1 className="md:px-6 text-black font-bold shadowText-w">CART</h1>
         </div>
 
         <main className="h-full flex flex-col md:max-h-577px overflow-y-scroll" id="itemsList">
@@ -83,11 +69,8 @@ export default function Cart() {
             TOTAL: ${cartTotal}
           </h2>
           <button
-            className="p-4 md:py-4 md:px-5 text-7xl md:text-3xl text-black font-bold border-white border-t-1 md:border-t-0 w-screen md:w-auto"
-            style={{
-              textShadow: "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff",
-            }}
-            onClick={() => console.log(itemList)}
+            className="p-4 md:py-4 md:px-5 text-7xl md:text-3xl text-black font-bold border-white border-t-1 md:border-t-0 w-screen md:w-auto shadowText-w"
+            onClick={() => checkout()}
           >
             CHECKOUT
           </button>

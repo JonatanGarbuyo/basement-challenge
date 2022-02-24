@@ -14,12 +14,7 @@ export default function ProductCard({product}) {
       onMouseEnter={() => setHidden(false)}
       onMouseLeave={() => setHidden(true)}
     >
-      <div
-        className="border-b-1 border-white relative"
-        style={{
-          background: "linear-gradient(360deg, #1D1D1D 0%, rgba(21, 21, 21, 0) 100%)",
-        }}
-      >
+      <div className="border-b-1 border-white relative backgroundGradient">
         <AddToCart hidden={hidden} product={product} />
         <Image alt={product.name} height={577} src={product.image} width={440} />
       </div>

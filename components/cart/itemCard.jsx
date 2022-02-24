@@ -14,12 +14,7 @@ export default function ItemCard({product}) {
 
   return (
     <div className="flex  border-white border-1 m-2 md:mx-6 p-2">
-      <div
-        className="relative w-60 h-36 md:h-52"
-        style={{
-          background: "linear-gradient(360deg, #1D1D1D 0%, rgba(21, 21, 21, 0) 100%)",
-        }}
-      >
+      <div className="relative w-60 h-36 md:h-52 backgroundGradient">
         <Image
           alt={product.name}
           layout="fill"
