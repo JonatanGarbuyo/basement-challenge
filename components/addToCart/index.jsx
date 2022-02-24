@@ -2,6 +2,9 @@ import useCart from "../../hooks/useCart";
 
 export default function AddToCart({product, ...props}) {
   const {addItem} = useCart();
+  const handleClick = () => {
+    addItem(product);
+  };
 
   return (
     <div {...props}>
@@ -12,9 +15,7 @@ export default function AddToCart({product, ...props}) {
           style={{
             textShadow: "-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff",
           }}
-          onClick={() => {
-            addItem(product);
-          }}
+          onClick={handleClick}
         >
           ADD TO CART
         </button>

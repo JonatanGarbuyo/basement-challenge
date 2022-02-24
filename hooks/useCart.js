@@ -23,14 +23,9 @@ export default function useCart() {
 
   //
   function addItem(item) {
-    const inCartId = Date.now();
+    const newItem = {...item, inCartId: Date.now().toString(), qty: 1, selectedSize: "S"};
 
-    item.inCartId = inCartId;
-    item.qty = 1;
-    item.selectedSize = "S";
-    itemList.push(item);
-    // }
-    updateItemList(itemList);
+    updateItemList([...itemList, newItem]);
   }
 
   //
