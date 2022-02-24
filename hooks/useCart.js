@@ -1,10 +1,12 @@
-import {useEffect, useContext} from "react";
+import {useEffect, useContext, useState} from "react";
 
 import {CartContext} from "../context/CartContext";
 
 export default function useCart() {
   const {itemList, setItemList} = useContext(CartContext);
+  const [cartTotal, setCartTotal] = useState(0);
 
+  // init cart
   useEffect(() => {
     const cartInLocalStorage = window.localStorage.getItem("cart");
 
@@ -13,7 +15,17 @@ export default function useCart() {
     } else {
       window.localStorage.setItem("cart", JSON.stringify([]));
     }
-  }, [setItemList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // update total price in cart
+  useEffect(() => {
+    const total = itemList.reduce((acc, product) => {
+      return (acc += product.price * product.qty);
+    }, 0);
+
+    setCartTotal(total.toFixed(2));
+  }, [itemList]);
 
   //
   function updateItemList(newList) {
@@ -70,11 +82,17 @@ export default function useCart() {
     updateItemList(newItemList);
   }
 
+  function checkout() {
+    console.log(itemList);
+  }
+
   return {
     addItem,
     removeItem,
     incrementQty,
     decrementQty,
     selectSize,
+    cartTotal,
+    checkout,
   };
 }
