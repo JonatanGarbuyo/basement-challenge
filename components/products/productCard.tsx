@@ -3,8 +3,13 @@ import Image from "next/image";
 
 import useShowElement from "../../hooks/useShowElement";
 import AddToCart from "../addToCart";
+import {Product} from "../../product/types";
 
-export default function ProductCard({product}) {
+interface props {
+  product: Product;
+}
+
+export default function ProductCard({product}: props) {
   const {hidden, setHidden, elementRef} = useShowElement();
 
   return (

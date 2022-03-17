@@ -2,10 +2,10 @@ import {useRef, useState, useEffect} from "react";
 
 export default function useShowElement() {
   const [hidden, setHidden] = useState(true);
-  const elementRef = useRef();
+  const elementRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handleIntersection = (entries) => {
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       const [el] = entries;
 
       if (el.isIntersecting && window.screen.width < 768) {
@@ -19,7 +19,7 @@ export default function useShowElement() {
       rootMargin: "-200px",
     });
 
-    observer.observe(elementRef.current);
+    if (elementRef.current) observer.observe(elementRef.current);
 
     return () => observer.disconnect();
   }, []);

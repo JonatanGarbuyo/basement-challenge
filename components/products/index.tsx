@@ -1,6 +1,12 @@
+import {Product} from "../../product/types";
+
 import ProductCard from "./productCard";
 
-export default function ProductsList({products}) {
+interface props {
+  products: Product[];
+}
+
+export default function ProductsList({products}: props) {
   return (
     <>
       <main className=" w-full">
