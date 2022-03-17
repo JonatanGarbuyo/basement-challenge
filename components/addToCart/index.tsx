@@ -1,8 +1,9 @@
 import useCart from "../../hooks/useCart";
-import {ICartProduct} from "../../interfaces/interfaces";
+import {Product} from "../../product/types";
 
 interface props {
-  product: ICartProduct;
+  hidden: boolean;
+  product: Product;
 }
 export default function AddToCart({product, ...props}: props) {
   const {addItem} = useCart();

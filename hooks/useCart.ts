@@ -2,6 +2,7 @@ import {useEffect, useContext, useState} from "react";
 
 import {CartContext} from "../context/CartContext";
 import {ICartProduct} from "../interfaces/interfaces";
+import {Product} from "../product/types";
 
 export default function useCart() {
   const {itemList, setItemList} = useContext(CartContext);
@@ -34,7 +35,7 @@ export default function useCart() {
     setItemList(newList);
   }
 
-  function addItem(item: ICartProduct) {
+  function addItem(item: Product) {
     const newItem = {...item, inCartId: Date.now().toString(), qty: 1, selectedSize: "S"};
 
     updateItemList([...itemList, newItem]);
