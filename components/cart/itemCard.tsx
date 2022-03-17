@@ -2,8 +2,13 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 
 import useCart from "../../hooks/useCart";
+import {ICartProduct} from "../../interfaces/interfaces";
 
-export default function ItemCard({product}) {
+interface props {
+  product: ICartProduct;
+}
+
+export default function ItemCard({product}: props) {
   const [itemTotal, setItemTotal] = useState(0);
   const {removeItem, incrementQty, decrementQty, selectSize} = useCart();
   const [options] = product.options;

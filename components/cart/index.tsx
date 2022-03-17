@@ -62,11 +62,11 @@ export default function Cart() {
               TOTAL
             </h2>
             <h2 className="flex-grow p-4 px-5 text-3xl text-right border-white md:border-r-1">
-              ${cartTotal}
+              ${cartTotal.toFixed(2)}
             </h2>
           </div>
           <h2 className="flex-grow p-4 px-5 text-3xl text-left hidden md:inline-block border-white md:border-r-1">
-            TOTAL: ${cartTotal}
+            TOTAL: ${cartTotal.toFixed(2)}
           </h2>
           <button
             className="p-4 md:py-4 md:px-5 text-7xl md:text-3xl text-black font-bold border-white border-t-1 md:border-t-0 w-screen md:w-auto shadowText-w"
