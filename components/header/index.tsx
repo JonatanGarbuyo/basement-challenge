@@ -68,7 +68,7 @@ export default function Header() {
         />
       </div>
 
-      <section className="my4 py-2 border-t-2 border-b-2 border-white">
+      <section className="my4 py-2 border-t-2 border-b-2 border-white max-w-full lg:max-w-none ">
         <div className="max-w-screen-xl sm:flex hidden mx-auto relative">
           <div className="absolute left-0 -top-4 z-30 ml-6">
             <Image alt="asterisk-icon" aria-hidden="true" src={asterisk} />
