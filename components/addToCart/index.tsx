@@ -1,6 +1,10 @@
 import useCart from "../../hooks/useCart";
+import {ICartProduct} from "../../interfaces/interfaces";
 
-export default function AddToCart({product, ...props}) {
+interface props {
+  product: ICartProduct;
+}
+export default function AddToCart({product, ...props}: props) {
   const {addItem} = useCart();
   const handleClick = () => {
     addItem(product);
