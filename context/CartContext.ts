@@ -1,10 +1,10 @@
 import {createContext, Dispatch, SetStateAction} from "react";
 
-import {Product} from "../product/types";
+import {ICartProduct} from "../interfaces/interfaces";
 
 interface IContextProps {
-  itemList: Product[];
-  setItemList: Dispatch<SetStateAction<Product[]>>;
+  itemList: ICartProduct[];
+  setItemList: Dispatch<SetStateAction<ICartProduct[]>>;
   isHidden: Boolean;
   setIsHidden: Dispatch<SetStateAction<Boolean>>;
 }
