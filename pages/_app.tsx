@@ -1,7 +1,7 @@
 import type {AppProps} from "next/app";
 import Head from "next/head";
 
-import CartContextProvider from "../context/CartContext";
+import CartContextProvider from "../context/CartProvider";
 import "../css/global.css";
 
 function App({Component, pageProps}: AppProps) {
