@@ -83,7 +83,7 @@ export default function useCart() {
   }
 
   function checkout() {
-    console.log(itemList);
+    if (itemList.length) console.log(itemList);
   }
 
   return {
