@@ -54,7 +54,7 @@ export default function Header() {
           <button
             className="border-2 rounded-3xl uppercase font-bold p-4px px-24px h-10 md:h-10
           hover:text-black hover:bg-white"
-            onClick={() => setIsHidden("")}
+            onClick={() => setIsHidden(false)}
           >
             cart ({itemList.length})
           </button>
@@ -77,9 +77,21 @@ export default function Header() {
             <Image alt="asterisk-icon" aria-hidden="true" src={asterisk2} />
           </div>
         </div>
-        <marquee behavior="scroll" className="text-4xl ">
-          {"A man can't have enough basement. swag — A man can't have enough basement. swag"}
-        </marquee>
+        <div className="relative flex text-4xl overflow-x-hidden">
+          <div className="py-1 animate-marquee whitespace-nowrap">
+            <span className="mx-4 ">{" A man can't have enough basement. swag "}</span>
+            <span className="mx-4 ">{" — "}</span>
+            <span className="mx-4 ">{" A man can't have enough basement. swag "}</span>
+            <span className="mx-4 ">{" — "}</span>
+          </div>
+
+          <div className="absolute top-0 py-1 animate-marquee2 whitespace-nowrap">
+            <span className="mx-4 ">{" A man can't have enough basement. swag "}</span>
+            <span className="mx-4 ">{" — "}</span>
+            <span className="mx-4 ">{" A man can't have enough basement. swag "}</span>
+            <span className="mx-4 ">{" — "}</span>
+          </div>
+        </div>
       </section>
     </header>
   );
