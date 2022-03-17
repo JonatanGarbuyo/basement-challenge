@@ -1,6 +1,7 @@
 import {useEffect, useContext, useState} from "react";
 
 import {CartContext} from "../context/CartContext";
+import {ICartProduct} from "../interfaces/interfaces";
 
 export default function useCart() {
   const {itemList, setItemList} = useContext(CartContext);
@@ -24,28 +25,28 @@ export default function useCart() {
       return (acc += product.price * product.qty);
     }, 0);
 
-    setCartTotal(total.toFixed(2));
+    setCartTotal(+total.toFixed(2));
   }, [itemList]);
 
   //
-  function updateItemList(newList) {
+  function updateItemList(newList: ICartProduct[]) {
     window.localStorage.setItem("cart", JSON.stringify(newList));
     setItemList(newList);
   }
 
-  function addItem(item) {
+  function addItem(item: ICartProduct) {
     const newItem = {...item, inCartId: Date.now().toString(), qty: 1, selectedSize: "S"};
 
     updateItemList([...itemList, newItem]);
   }
 
-  function removeItem(item) {
+  function removeItem(item: ICartProduct) {
     const newItemList = itemList.filter((cartItem) => item.inCartId !== cartItem.inCartId);
 
     updateItemList(newItemList);
   }
 
-  function incrementQty(item) {
+  function incrementQty(item: ICartProduct) {
     const newItemList = itemList.map((cartItem) => {
       if (item.inCartId === cartItem.inCartId) cartItem.qty++;
 
@@ -55,8 +56,8 @@ export default function useCart() {
     updateItemList(newItemList);
   }
 
-  function decrementQty(item) {
-    const newItemList = itemList.reduce((list, cartItem) => {
+  function decrementQty(item: ICartProduct) {
+    const newItemList = itemList.reduce<ICartProduct[]>((list, cartItem) => {
       if (item.inCartId === cartItem.inCartId) {
         if (cartItem.qty > 1) {
           cartItem.qty--;
@@ -72,7 +73,7 @@ export default function useCart() {
     updateItemList(newItemList);
   }
 
-  function selectSize(inCartId, value) {
+  function selectSize(inCartId: string, value: string) {
     const newItemList = itemList.map((cartItem) => {
       if (inCartId === cartItem.inCartId) cartItem.selectedSize = value;
 
@@ -83,6 +84,7 @@ export default function useCart() {
   }
 
   function checkout() {
+    // eslint-disable-next-line no-console
     if (itemList.length) console.log(itemList);
   }
 
