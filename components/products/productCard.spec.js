@@ -1,15 +1,13 @@
 import React from "react";
 import {render} from "@testing-library/react";
-import "@testing-library/jest-dom";
 
 import ProductCard from "./productCard";
-import "../../__mocks__/intersectionObserverMock";
+import "../../test/__mocks__/intersectionObserverMock";
 
 describe("ProductCard", () => {
   let spectedProps;
 
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     spectedProps = {
       id: "black-tshirt",
       image: "/products/shirt.png",

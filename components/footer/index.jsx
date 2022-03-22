@@ -1,13 +1,11 @@
 import React from "react";
 import Image from "next/image";
 
-import logo from "../../public/footer.svg";
-
 export default function Footer() {
   return (
     <footer className="w-full">
-      <div className="flex justify-center m-6">
-        <Image alt="wear everyday" src={logo} />
+      <div className="relative flex justify-center mx-4 ">
+        <Image alt="wear everyday" height="486px" src="/footer.svg" width="1376px" />
       </div>
     </footer>
   );
