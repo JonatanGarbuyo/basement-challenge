@@ -1,9 +1,6 @@
 import Image from "next/image";
 import {useContext} from "react";
 
-import logo from "../../public/logo.svg";
-import asterisk from "../../public/asterisk.svg";
-import asterisk2 from "../../public/asterisk2.svg";
 import {CartContext} from "../../context/CartContext";
 
 import Circle from "./circle";
@@ -16,7 +13,7 @@ export default function Header() {
       <div className="m-4 md:mb-8 md:m-6 flex justify-center flex-col">
         <div className="text-white text-center flex justify-between md:static my-2 md:py-9 w-full">
           <div className="hidden md:inline-block">
-            <Image alt="Basement" src={logo} />
+            <Image alt="Basement" height="28" src={"/logo.svg"} width="192" />
           </div>
           <div className="hidden md:flex items-center ">
             <Circle />
@@ -56,7 +53,7 @@ export default function Header() {
           hover:text-black hover:bg-white"
             onClick={() => setIsHidden(false)}
           >
-            cart ({itemList.length})
+            cart ({itemList?.length || 0})
           </button>
         </div>
         <Image
@@ -71,24 +68,36 @@ export default function Header() {
       <section className="my4 py-2 border-t-2 border-b-2 border-white max-w-full lg:max-w-none ">
         <div className="max-w-screen-xl sm:flex hidden mx-auto relative">
           <div className="absolute left-0 -top-4 z-30 ml-6">
-            <Image alt="asterisk-icon" aria-hidden="true" src={asterisk} />
+            <Image
+              alt="asterisk-image"
+              aria-hidden="true"
+              height="168px"
+              src={"/asterisk.svg"}
+              width="190px"
+            />
           </div>
           <div className="absolute right-0 -top-28 z-30 mr-6">
-            <Image alt="asterisk-icon" aria-hidden="true" src={asterisk2} />
+            <Image
+              alt="asterisk-image2"
+              aria-hidden="true"
+              height="144px"
+              src={"/asterisk2.svg"}
+              width="144px"
+            />
           </div>
         </div>
-        <div className="relative flex text-4xl overflow-x-hidden">
+        <div className="relative flex text-4xl overflow-x-hidden" data-testid="marquee">
           <div className="py-1 animate-marquee whitespace-nowrap">
-            <span className="mx-4 ">{" A man can't have enough basement. swag "}</span>
+            <span className="mx-4 ">{"A man can't have enough basement. swag"}</span>
             <span className="mx-4 ">{" — "}</span>
-            <span className="mx-4 ">{" A man can't have enough basement. swag "}</span>
+            <span className="mx-4 ">{"A man can't have enough basement. swag"}</span>
             <span className="mx-4 ">{" — "}</span>
           </div>
 
           <div className="absolute top-0 py-1 animate-marquee2 whitespace-nowrap">
-            <span className="mx-4 ">{" A man can't have enough basement. swag "}</span>
+            <span className="mx-4 ">{"A man can't have enough basement. swag"}</span>
             <span className="mx-4 ">{" — "}</span>
-            <span className="mx-4 ">{" A man can't have enough basement. swag "}</span>
+            <span className="mx-4 ">{"A man can't have enough basement. swag"}</span>
             <span className="mx-4 ">{" — "}</span>
           </div>
         </div>
