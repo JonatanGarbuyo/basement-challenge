@@ -22,11 +22,13 @@ export default function useCart() {
 
   // update total price in cart
   useEffect(() => {
-    const total = itemList.reduce((acc, product) => {
-      return (acc += product.price * product.qty);
-    }, 0);
+    if (itemList?.length) {
+      const total = itemList.reduce((acc, product) => {
+        return (acc += product.price * product.qty);
+      }, 0);
 
-    setCartTotal(+total.toFixed(2));
+      setCartTotal(+total.toFixed(2));
+    }
   }, [itemList]);
 
   //
