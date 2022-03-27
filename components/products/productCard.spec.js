@@ -1,36 +1,56 @@
 import React from "react";
-import {render} from "@testing-library/react";
+import {fireEvent, render, screen} from "@testing-library/react";
+
+import "../../test/__mocks__/mockIntersectionObserver";
+
+import mockProduct from "../../test/__mocks__/mockProduct";
+import useCart from "../../hooks/useCart";
+import {CartContext} from "../../context/CartContext";
 
 import ProductCard from "./productCard";
-import "../../test/__mocks__/intersectionObserverMock";
+
+jest.mock("../../hooks/useCart");
+
+const mockUseCart = {
+  addItem: jest.fn(),
+};
+
+useCart.mockReturnValue(mockUseCart);
 
 describe("ProductCard", () => {
-  let spectedProps;
-
   beforeEach(() => {
-    spectedProps = {
-      id: "black-tshirt",
-      image: "/products/shirt.png",
-      price: 7.95,
-      name: "Black t-shirt",
-      description: "Unisex Basic Softstyle T-Shirt",
-      options: [
-        {
-          label: "size",
-          values: ["S", "M", "L", "XL"],
-        },
-      ],
-    };
+    render(
+      <CartContext.Provider value={{setItemList: jest.fn()}}>
+        <ProductCard product={mockProduct} />
+      </CartContext.Provider>,
+    );
   });
 
-  test("should render content in component ProductCard", async () => {
-    const {getByText, getByAltText} = render(<ProductCard product={spectedProps} />);
-    const name = getByText(spectedProps.name);
-    const price = getByText("$" + spectedProps.price);
-    const image = getByAltText(spectedProps.name);
+  describe("show the product", () => {
+    it("should render the title", () => {
+      expect(screen.getByText(mockProduct.name)).toBeInTheDocument();
+    });
+    it("should render the price", () => {
+      expect(screen.getByText("$" + mockProduct.price)).toBeInTheDocument();
+    });
+    it("should render the image", () => {
+      expect(screen.getByAltText(mockProduct.name)).toBeInTheDocument();
+    });
+  });
 
-    expect(name).toBeVisible();
-    expect(price).toBeVisible();
-    expect(image).toBeVisible();
+  describe("show a button to add porduct in cart", () => {
+    beforeEach(() => {
+      fireEvent.mouseEnter(screen.getByRole("img"));
+    });
+    it("should show a button on mouse enter", () => {
+      expect(screen.getByRole("button")).toBeInTheDocument();
+    });
+    it("should call a function to add 1 product to cart when button is clicked", () => {
+      const spyAddItem = jest.spyOn(mockUseCart, "addItem");
+
+      expect(spyAddItem).not.toBeCalled();
+      fireEvent.click(screen.getByRole("button"));
+      expect(spyAddItem).toBeCalledTimes(1);
+    });
   });
 });
