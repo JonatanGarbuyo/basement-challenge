@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-import {Product} from "../product/types";
+import {ICartProduct} from "../interfaces/interfaces";
 
 import {CartContext} from "./CartContext";
 
@@ -9,7 +9,7 @@ interface IProps {
 }
 
 export default function CartContextProvider({children}: IProps) {
-  const [itemList, setItemList] = useState<Product[]>([]);
+  const [itemList, setItemList] = useState<ICartProduct[]>([]);
   const [isHidden, setIsHidden] = useState<Boolean>(true);
 
   return (
