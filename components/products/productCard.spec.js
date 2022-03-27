@@ -5,7 +5,6 @@ import "../../test/__mocks__/mockIntersectionObserver";
 
 import mockProduct from "../../test/__mocks__/mockProduct";
 import useCart from "../../hooks/useCart";
-import {CartContext} from "../../context/CartContext";
 
 import ProductCard from "./productCard";
 
@@ -19,11 +18,7 @@ useCart.mockReturnValue(mockUseCart);
 
 describe("ProductCard", () => {
   beforeEach(() => {
-    render(
-      <CartContext.Provider value={{setItemList: jest.fn()}}>
-        <ProductCard product={mockProduct} />
-      </CartContext.Provider>,
-    );
+    render(<ProductCard product={mockProduct} />);
   });
 
   describe("show the product", () => {
