@@ -31,7 +31,7 @@ export default function ItemCard({product}: props) {
         <header className="md:flex-grow">
           <div className="flex justify-between items-center content-center">
             <h1 className="text-sm md:text-3xl font-bold uppercase">{product.name}</h1>
-            <button className="mr-4" onClick={() => removeItem(product)}>
+            <button aria-label="remove item" className="mr-4" onClick={() => removeItem(product)}>
               X
             </button>
           </div>
@@ -48,11 +48,19 @@ export default function ItemCard({product}: props) {
           <div className="flex gap-3 items-center my-2 ">
             <h2>QUANTITY:</h2>
             <div className="flex flex-row ml-2 border-1 border-white rounded-full">
-              <button className="w-6" onClick={() => decrementQty(product)}>
+              <button
+                aria-label="decrement quantity"
+                className="w-6"
+                onClick={() => decrementQty(product)}
+              >
                 -
               </button>
-              <p>{product.qty}</p>
-              <button className="w-6" onClick={() => incrementQty(product)}>
+              <p aria-label="product quantity">{product.qty}</p>
+              <button
+                aria-label="increment quantity"
+                className="w-6"
+                onClick={() => incrementQty(product)}
+              >
                 +
               </button>
             </div>
@@ -64,6 +72,7 @@ export default function ItemCard({product}: props) {
                 {options.values.map((value) => (
                   <button
                     key={value}
+                    aria-label={`size ${value}`}
                     className={`uppercase w-6  md:w-8 border-white ${
                       product.selectedSize === value ? "border-1 rounded-full" : ""
                     }`}
