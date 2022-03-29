@@ -15,6 +15,7 @@ export default function AddToCart({product, ...props}: props) {
     <div {...props}>
       <div className="flex justify-center absolute  top-1/3 z-40 w-full">
         <button
+          aria-label="add to cart"
           className="text-black font-bold text-3xl absolute top-1/3 z-50 shadowText-w"
           id={product && product.id}
           onClick={handleClick}
