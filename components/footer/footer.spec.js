@@ -1,13 +1,15 @@
 import React from "react";
-import {render} from "@testing-library/react";
+import {render, screen} from "@testing-library/react";
 
 import Footer from "./index";
 
 describe("Footer", () => {
-  test("should render content in component Footer", async () => {
-    const {getByAltText} = render(<Footer />);
-    const image = getByAltText("wear everyday");
-
-    expect(image).toBeVisible();
+  beforeEach(() => {
+    render(<Footer />);
+  });
+  describe("should render content in component Footer", () => {
+    it("should render the logo", () => {
+      expect(screen.getByAltText("wear everyday")).toBeInTheDocument();
+    });
   });
 });
