@@ -49,6 +49,7 @@ export default function Header() {
           </div>
           <h1 className="inline-block md:hidden text-6xl">b.</h1>
           <button
+            aria-label="cart button"
             className="border-2 rounded-3xl uppercase font-bold p-4px px-24px h-10 md:h-10
           hover:text-black hover:bg-white"
             onClick={() => setIsHidden(false)}

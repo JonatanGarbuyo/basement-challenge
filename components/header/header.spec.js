@@ -1,24 +1,36 @@
 import React from "react";
-import {render} from "@testing-library/react";
+import {render, screen} from "@testing-library/react";
 
 import Header from "./index";
 
 describe("Header", () => {
-  test("should render content in Header component", async () => {
-    const {getByTestId, getByRole, getByAltText} = render(<Header />);
+  beforeEach(() => {
+    render(<Header />);
+  });
+  describe("shows content in Header component", () => {
+    it("should render the logo", () => {
+      expect(screen.getByAltText("Basement")).toBeInTheDocument();
+    });
+    it("should render the image", () => {
+      expect(screen.getByAltText("basement supply")).toBeInTheDocument();
+    });
+    it("should render the marquee", () => {
+      expect(screen.getByTestId("marquee")).toBeInTheDocument();
+    });
+    it("should render the asterisk1", () => {
+      expect(screen.getByAltText("asterisk-image")).toBeInTheDocument();
+    });
+    it("should render the asterisk2", () => {
+      expect(screen.getByAltText("asterisk-image2")).toBeInTheDocument();
+    });
+  });
 
-    const cartButton = getByRole("button");
-    const marquee = getByTestId("marquee");
-    const logo = getByAltText("Basement");
-    const image = getByAltText("basement supply");
-    const asterisk1 = getByAltText("asterisk-image");
-    const asterisk2 = getByAltText("asterisk-image2");
-
-    expect(cartButton).toBeVisible();
-    expect(marquee).toBeVisible();
-    expect(logo).toBeVisible();
-    expect(image).toBeVisible();
-    expect(asterisk1).toBeVisible();
-    expect(asterisk2).toBeVisible();
+  describe("shows a Cart button", () => {
+    it("should render the cart button", () => {
+      expect(screen.getByRole("button", {name: "cart button"})).toBeInTheDocument();
+    });
+    it("should render the item in cart count", () => {
+      expect(screen.getByText(`cart (0)`)).toBeInTheDocument();
+    });
   });
 });
