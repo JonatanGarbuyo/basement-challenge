@@ -1,4 +1,4 @@
-import {createContext, Dispatch, SetStateAction} from "react";
+import {createContext, Dispatch, SetStateAction, useContext} from "react";
 
 import {ICartProduct} from "../interfaces/interfaces";
 
@@ -10,3 +10,5 @@ interface IContextProps {
 }
 
 export const CartContext = createContext({} as IContextProps);
+
+export const useCartContext = () => useContext(CartContext);

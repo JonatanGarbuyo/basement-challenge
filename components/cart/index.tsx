@@ -1,12 +1,12 @@
-import {useCallback, useContext, useEffect} from "react";
+import {useCallback, useEffect} from "react";
 
-import {CartContext} from "../../context/CartContext";
+import {useCartContext} from "../../context/CartContext";
 import useCart from "../../hooks/useCart";
 
 import ItemCard from "./itemCard";
 
 export default function Cart() {
-  const {itemList, isHidden, setIsHidden} = useContext(CartContext);
+  const {itemList, isHidden, setIsHidden} = useCartContext();
   const {cartTotal, checkout} = useCart();
 
   const escFunction = useCallback(
@@ -41,7 +41,7 @@ export default function Cart() {
           className=" font-bold text-xl text-right py-4 px-2 md:p-6"
           onClick={() => setIsHidden(true)}
         >
-          <button>&rarr; CLOSE</button>
+          <button aria-label="close cart">&rarr; CLOSE</button>
         </div>
         <div className="flex flex-col md:flex-row text-9xl md:text-8xl ">
           <h1 className="md:pl-6 font-bold ">YOUR</h1>
@@ -69,6 +69,7 @@ export default function Cart() {
             TOTAL: ${cartTotal.toFixed(2)}
           </h2>
           <button
+            aria-label="checkout"
             className="p-4 md:py-4 md:px-5 text-7xl md:text-3xl text-black font-bold border-white border-t-1 md:border-t-0 w-screen md:w-auto shadowText-w"
             onClick={() => checkout()}
           >
