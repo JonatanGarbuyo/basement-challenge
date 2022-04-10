@@ -66,7 +66,7 @@ export default function Cart() {
             </h2>
           </div>
           <h2 className="flex-grow p-4 px-5 text-3xl text-left hidden md:inline-block border-white md:border-r-1">
-            TOTAL: ${cartTotal.toFixed(2)}
+            {`TOTAL: $${cartTotal.toFixed(2)}`}
           </h2>
           <button
             aria-label="checkout"
